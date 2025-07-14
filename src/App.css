@@ -20,16 +20,7 @@ h4 {
     color: #3d74b6;
 }
 
-.circleA {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    margin: 2px;
-    border: 2px solid orangered;
-    cursor: pointer;
-}
-
-.circleB {
+.bitCircle {
     width: 25px;
     height: 25px;
     border-radius: 50%;
@@ -44,15 +35,6 @@ h4 {
     border-radius: 50%;
     margin: 2px;
     border: 2px solid rgb(54, 41, 36);
-}
-
-.circleR {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    margin: 2px;
-    border: 2px solid orangered;
-    cursor: pointer;
 }
 
 .circles {
