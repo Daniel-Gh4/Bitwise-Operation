@@ -5,7 +5,7 @@ function App() {
   // States & Variable
   let [inputA, setInputA] = useState(Array(8).fill(true));
   let [inputB, setInputB] = useState(Array(8).fill(true));
-  let [oper, setOper] = useState(Array(4).fill(false));
+  let [oper, setOper] = useState("AND");
   let circle = Array(24).fill("bitCircle");
   let opera = Array(4).fill("oper");
 
@@ -17,58 +17,74 @@ function App() {
   function handleActiveA(i) {
     let newInputA = [...inputA];
     newInputA[i] = !newInputA[i];
-    setInputA((inputA = [...newInputA]));
+    setInputA([...newInputA]);
   }
 
   // Set B Toggle
   for (let i = 0; i < 8; i++) {
-    if (oper[3]) {
-      for(let i = 0; i < 8; i++){
-        circle[i + 8] = "vanish" ;
-      }
-    } else {
       circle[i + 8] = inputB[i] ? "bitCircle" : "active";
     }
-  }
 
   function handleActiveB(i) {
     let newInputB = [...inputB];
     newInputB[i] = !newInputB[i];
-    setInputB((inputB = [...newInputB]));
+    setInputB([...newInputB]);
   }
 
   // Set Operation Toggle & functionality
-  for (let i = 0; i <= 4; i++) {
-    opera[i] = !oper[i] ? "oper" : "opermode";
-  }
 
   function handleOper(i) {
-    setOper((oper = Array(4).fill(false)));
-    let newoper = [...oper];
-    newoper[i] = !newoper[i];
-    setOper((oper = [...newoper]));
+    switch(i){
+      case 0:
+        setOper("AND")
+        break;
+      case 1:
+        setOper("OR")
+        break;
+      case 2:
+        setOper("XOR")
+        break;
+      case 3:
+        setOper("NOT")
+        break;
+      default:
+    }
   }
 
-  if (oper[0]) {
-    for (let i = 0; i < 8; i++) {
-      circle[i + 16] = !inputA[i] && !inputB[i] ? "active" : "bitCircle";
-    }
-  } else if (oper[1]) {
-    for (let i = 0; i < 8; i++) {
+  switch(oper){
+    case "AND":
+      opera[0] = "opermode";
+      for (let i = 0; i < 8; i++) {
+        circle[i + 16] = !inputA[i] && !inputB[i] ? "active" : "bitCircle";
+      }
+      break;
+    case "OR":
+      opera[1] = "opermode";
+      for (let i = 0; i < 8; i++) {
       circle[i + 16] = !inputA[i] || !inputB[i] ? "active" : "bitCircle";
-    }
-  } else if (oper[2]) {
-    for (let i = 0; i < 8; i++) {
-      circle[i + 16] =
-        (inputA[i] && !inputB[i]) || (!inputA[i] && inputB[i])
-          ? "active"
-          : "bitCircle";
-    }
-  } else if (oper[3]) {
-    for (let i = 0; i < 8; i++) {
+      }
+      break;
+    case "XOR":
+      opera[2] = "opermode";
+      for (let i = 0; i < 8; i++) {
+        circle[i + 16] =
+          (inputA[i] && !inputB[i]) || (!inputA[i] && inputB[i])
+            ? "active"
+            : "bitCircle";
+      }
+      break;
+    case "NOT":
+      for(let i = 0; i < 8; i++){
+        circle[i + 8] = "vanish" ;
+      }
+      opera[3] = "opermode";
+      for (let i = 0; i < 8; i++) {
       circle[i + 16] = inputA[i] ? "active" : "bitCircle";
     }
+      break;
+    default:
   }
+
 
   return (
     // BODY
