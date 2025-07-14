@@ -5,13 +5,13 @@ function App() {
   // States & Variable
   let [inputA, setInputA] = useState(Array(8).fill(true));
   let [inputB, setInputB] = useState(Array(8).fill(true));
-  let [oper, setOper] = useState("AND");
-  let circle = Array(24).fill("bitCircle");
-  let opera = Array(4).fill("oper");
+  let [operator, setOperator] = useState("AND");
+  let circleClass = Array(24).fill("bitCircle");
+  let operatorClass = Array(4).fill("operator");
 
    // Set A Toggle
   for (let i = 0; i < 8; i++) {
-    circle[i] = inputA[i] ? "bitCircle" : "active";
+    circleClass[i] = inputA[i] ? "bitCircle" : "active";
   }
 
   function handleActiveA(i) {
@@ -22,7 +22,7 @@ function App() {
 
   // Set B Toggle
   for (let i = 0; i < 8; i++) {
-      circle[i + 8] = inputB[i] ? "bitCircle" : "active";
+      circleClass[i + 8] = inputB[i] ? "bitCircle" : "active";
     }
 
   function handleActiveB(i) {
@@ -36,38 +36,38 @@ function App() {
   function handleOper(i) {
     switch(i){
       case 0:
-        setOper("AND")
+        setOperator("AND")
         break;
       case 1:
-        setOper("OR")
+        setOperator("OR")
         break;
       case 2:
-        setOper("XOR")
+        setOperator("XOR")
         break;
       case 3:
-        setOper("NOT")
+        setOperator("NOT")
         break;
       default:
     }
   }
 
-  switch(oper){
+  switch(operator){
     case "AND":
-      opera[0] = "opermode";
+      operatorClass[0] = "activeOperator";
       for (let i = 0; i < 8; i++) {
-        circle[i + 16] = !inputA[i] && !inputB[i] ? "active" : "bitCircle";
+        circleClass[i + 16] = !inputA[i] && !inputB[i] ? "active" : "bitCircle";
       }
       break;
     case "OR":
-      opera[1] = "opermode";
+      operatorClass[1] = "activeOperator";
       for (let i = 0; i < 8; i++) {
-      circle[i + 16] = !inputA[i] || !inputB[i] ? "active" : "bitCircle";
+      circleClass[i + 16] = !inputA[i] || !inputB[i] ? "active" : "bitCircle";
       }
       break;
     case "XOR":
-      opera[2] = "opermode";
+      operatorClass[2] = "activeOperator";
       for (let i = 0; i < 8; i++) {
-        circle[i + 16] =
+        circleClass[i + 16] =
           (inputA[i] && !inputB[i]) || (!inputA[i] && inputB[i])
             ? "active"
             : "bitCircle";
@@ -75,11 +75,11 @@ function App() {
       break;
     case "NOT":
       for(let i = 0; i < 8; i++){
-        circle[i + 8] = "vanish" ;
+        circleClass[i + 8] = "disActive" ;
       }
-      opera[3] = "opermode";
+      operatorClass[3] = "activeOperator";
       for (let i = 0; i < 8; i++) {
-      circle[i + 16] = inputA[i] ? "active" : "bitCircle";
+      circleClass[i + 16] = inputA[i] ? "active" : "bitCircle";
     }
       break;
     default:
@@ -96,52 +96,52 @@ function App() {
         <div className="input">
           <h4>Enter A:</h4>
           <div className="circles">
-            <div  onClick={() => {handleActiveA(0);}} className={(circle[0])}></div>
-            <div  onClick={() => {handleActiveA(1);}} className={(circle[1])}></div>
-            <div  onClick={() => {handleActiveA(2);}} className={(circle[2])}></div>
-            <div  onClick={() => {handleActiveA(3);}} className={(circle[3])}></div>
-            <div  onClick={() => {handleActiveA(4);}} className={(circle[4])}></div>
-            <div  onClick={() => {handleActiveA(5);}} className={(circle[5])}></div>
-            <div  onClick={() => {handleActiveA(6);}} className={(circle[6])}></div>
-            <div  onClick={() => {handleActiveA(7);}} className={(circle[7])}></div>
+            <div  onClick={() => {handleActiveA(0);}} className={(circleClass[0])}></div>
+            <div  onClick={() => {handleActiveA(1);}} className={(circleClass[1])}></div>
+            <div  onClick={() => {handleActiveA(2);}} className={(circleClass[2])}></div>
+            <div  onClick={() => {handleActiveA(3);}} className={(circleClass[3])}></div>
+            <div  onClick={() => {handleActiveA(4);}} className={(circleClass[4])}></div>
+            <div  onClick={() => {handleActiveA(5);}} className={(circleClass[5])}></div>
+            <div  onClick={() => {handleActiveA(6);}} className={(circleClass[6])}></div>
+            <div  onClick={() => {handleActiveA(7);}} className={(circleClass[7])}></div>
           </div>
         </div>
         {/* 2nd Input */}
         <div className="input">
           <h4>Enter B:</h4>
           <div className="circles">
-            <div  onClick={() => {handleActiveB(0);}} className={(circle[8])}></div>
-            <div  onClick={() => {handleActiveB(1);}} className={(circle[9])}></div>
-            <div  onClick={() => {handleActiveB(2);}} className={(circle[10])}></div>
-            <div  onClick={() => {handleActiveB(3);}} className={(circle[11])}></div>
-            <div  onClick={() => {handleActiveB(4);}} className={(circle[12])}></div>
-            <div  onClick={() => {handleActiveB(5);}} className={(circle[13])}></div>
-            <div  onClick={() => {handleActiveB(6);}} className={(circle[14])}></div>
-            <div  onClick={() => {handleActiveB(7);}} className={(circle[15])}></div>
+            <div  onClick={() => {handleActiveB(0);}} className={(circleClass[8])}></div>
+            <div  onClick={() => {handleActiveB(1);}} className={(circleClass[9])}></div>
+            <div  onClick={() => {handleActiveB(2);}} className={(circleClass[10])}></div>
+            <div  onClick={() => {handleActiveB(3);}} className={(circleClass[11])}></div>
+            <div  onClick={() => {handleActiveB(4);}} className={(circleClass[12])}></div>
+            <div  onClick={() => {handleActiveB(5);}} className={(circleClass[13])}></div>
+            <div  onClick={() => {handleActiveB(6);}} className={(circleClass[14])}></div>
+            <div  onClick={() => {handleActiveB(7);}} className={(circleClass[15])}></div>
           </div>
         </div>
         {/* OPeration */}
         <div className="choose">
           <h4>Choose The Operation:</h4>
-          <div className="opers">
-            <div onClick={() => {handleOper(0);}} className={opera[0]}>AND</div>
-            <div onClick={() => {handleOper(1);}} className={opera[1]}>OR</div>
-            <div onClick={() => {handleOper(2);}} className={opera[2]}>XOR</div>
-            <div onClick={() => {handleOper(3);}} className={opera[3]}>NOT</div>
+          <div className="operators">
+            <div onClick={() => {handleOper(0);}} className={operatorClass[0]}>AND</div>
+            <div onClick={() => {handleOper(1);}} className={operatorClass[1]}>OR</div>
+            <div onClick={() => {handleOper(2);}} className={operatorClass[2]}>XOR</div>
+            <div onClick={() => {handleOper(3);}} className={operatorClass[3]}>NOT</div>
           </div>
         </div>
         {/* The Result */}
         <div className="result">
           <h4>Result:</h4>
           <div className="circles">
-            <div className={circle[16]}></div>
-            <div className={circle[17]}></div>
-            <div className={circle[18]}></div>
-            <div className={circle[19]}></div>
-            <div className={circle[20]}></div>
-            <div className={circle[21]}></div>
-            <div className={circle[22]}></div>
-            <div className={circle[23]}></div>
+            <div className={circleClass[16]}></div>
+            <div className={circleClass[17]}></div>
+            <div className={circleClass[18]}></div>
+            <div className={circleClass[19]}></div>
+            <div className={circleClass[20]}></div>
+            <div className={circleClass[21]}></div>
+            <div className={circleClass[22]}></div>
+            <div className={circleClass[23]}></div>
           </div>
         </div>
       </div>
